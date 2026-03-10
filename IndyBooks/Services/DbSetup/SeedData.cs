@@ -25,8 +25,8 @@ namespace IndyBooks.Services;
             var testBooks = new Faker<Book>()
                 .RuleFor(b => b.Title, t => t.PickRandom(titles))
                 .RuleFor(b => b.SKU, n => n.Random.Replace("IB****-##"))
-                .RuleFor(b => b.Price, f => f.Random.Decimal(9.99M, 149.99M))
-                .RuleFor(b => b.Author, f => f.PickRandom(writers));
+                .RuleFor(b => b.Price, f => f.Random.Decimal(9.99M, 149.99M));
+               // .RuleFor(b => b.Author, f => f.PickRandom(writers));
          //Create a collection of 100 books
             var books = testBooks.Generate(100); 
             //Add books and writers collection to their collection 
