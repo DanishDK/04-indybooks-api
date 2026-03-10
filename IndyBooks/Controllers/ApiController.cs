@@ -45,13 +45,13 @@ namespace IndyBooks.Controllers
         [HttpDelete]
         public ActionResult Delete(long id)
         {
-            //TODO: Udpate the  for record using the _writerService.GetWritersList and the Any() collections method
+            //DONE: Udpate the  for record using the _writerService.GetWritersList and the Any() collections method
             if (_writerService.GetWriterById(id) ==null) 
             { 
                 return NotFound(); 
             }
 
-            //TODO: Pass the _writerService DeleteWriterById method to Accepted() below
+            //DONE: Pass the _writerService DeleteWriterById method to Accepted() below
 
             return Accepted(_writerService.DeleteWriterById(id));
         }
@@ -64,9 +64,13 @@ namespace IndyBooks.Controllers
         public IActionResult PostWriter([FromBody]Writer writer)
         {
             //TODO: Test for an invalid ModelState -> return BadRequest();
-
+            if (!ModelState.IsValid)
+            {
+            return BadRequest();
+            }
 
             //TODO: Pass the result from the _writerService PostWriter method to Accepted() below
+            long id = _writerService.PostWriter(writer);
 
             return Accepted( 0 );
 
