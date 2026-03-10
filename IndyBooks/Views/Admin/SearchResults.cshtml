@@ -1,0 +1,62 @@
+﻿@model IndyBooks.ViewModels.SearchResultsVM
+@using IndyBooks.Controllers
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewBag.Title = "Admin Search";
+    Layout = "_Layout";
+}
+
+<h3>Search Result</h3>
+
+<!-- Uses the new properties from the ERD-->
+<table class="table">
+    <tr>
+        <th>
+            Title
+        </th>
+        <th>
+            Author
+        </th>
+        <th>
+            SKU
+        </th>
+        <th>
+            Price
+        </th>
+    </tr>
+
+    @foreach (var book in Model.Books)
+    {
+        <tr>
+            <td>
+                @book.Title
+            </td>
+            <td>
+                @book.Author.Name
+            </td>
+            <td class="rightedge">
+                @book.SKU
+            </td>
+            <td class="rightedge">
+                @String.Format("{0:C2}", @book.Price)
+            </td>
+            <td class="rightedge">
+                <!-- Sets the asp-route-id attribute to the  book.Id in the Remove and Update links -->
+                <a asp-action="@nameof(AdminController.RemoveBook)" asp-controller="Admin"
+                   asp-route-id="@book.Id">Remove</a> |
+                <!-- TODO: Add an "Update action link here-->
+                <a asp-action="@nameof(AdminController.UpdateBook)" asp-controller="Admin"
+                   asp-route-id="@book.Id">Update</a>
+            </td>
+        </tr>
+    }
+    @if (Model.IsSale)
+    { //Uses an aggregate method to display the number of books for sale
+        <tr>
+            <td colspan="4" align="right">
+                <b>Number of half-price books:</b>
+                @Model.Books.Count(b => b.Price > 0)
+            </td>
+        </tr>
+    }
+</table>

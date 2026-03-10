@@ -1,0 +1,30 @@
+﻿@model IndyBooks.ViewModels.SearchVM
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Search";
+}
+<h3>Find Books</h3>
+<form asp-action="Search" asp-controller="Admin">
+    <fieldset>
+        <label asp-for="Title"></label>
+        <input asp-for="Title" />
+        <br />
+        <label asp-for="AuthorLastName"></label>
+        <input asp-for="AuthorLastName" />
+        <br />
+        <label asp-for="SKU"></label>
+        <input asp-for="SKU" />
+        <br />
+        <label asp-for="MinPrice"></label>
+        <input asp-for="MinPrice" />
+        <br />
+        <label asp-for="MaxPrice"></label>
+        <input asp-for="MaxPrice" />
+        <br />
+
+        <label asp-for="HalfPriceSale"></label>
+        <input type="checkbox" asp-for="HalfPriceSale"/>
+    </fieldset>
+    <input type="submit" value="Search" />
+</form>
